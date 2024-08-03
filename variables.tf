@@ -8,7 +8,7 @@
 #                                    #
 ######################################
 
-# Filename: main.tf
+# Filename: variables.tf
 # Description: 
 # Version: 1.0.0
 # Author: Benjamin Schneider <ich@benjamin-schneider.com>
@@ -17,19 +17,14 @@
 # Changelog: 
 # 1.0.0 - Initial version
 
-#########################
-# Modules Configuration #
-#########################
-
-module "globals" {
-  source      = "gitlab.com/Javik/terraform-javikweb-modules/globals"
-  version     = "~> 1.0.0"
-  environment = "live"
-  domain      = "runners.sirjavik.de"
+variable "hcloud_token" {
+  description = "Hetzner Cloud API Token"
+  sensitive   = true
+  type        = string
 }
 
-module "network" {
-  source      = "gitlab.com/Javik/terraform-hcloud-modules/network"
-  version     = "~> 1.0.0"
-  environment = module.globals.environment
+variable "cloudflare_api_token" {
+  description = "Cloudflare API Token"
+  sensitive   = true
+  type        = string
 }

@@ -8,7 +8,7 @@
 #                                    #
 ######################################
 
-# Filename: main.tf
+# Filename: provider.tf
 # Description: 
 # Version: 1.0.0
 # Author: Benjamin Schneider <ich@benjamin-schneider.com>
@@ -18,18 +18,18 @@
 # 1.0.0 - Initial version
 
 #########################
-# Modules Configuration #
+#       Providers       #
 #########################
 
-module "globals" {
-  source      = "gitlab.com/Javik/terraform-javikweb-modules/globals"
-  version     = "~> 1.0.0"
-  environment = "live"
-  domain      = "runners.sirjavik.de"
+provider "hcloud" {
+  token = var.hcloud_token
 }
 
-module "network" {
-  source      = "gitlab.com/Javik/terraform-hcloud-modules/network"
-  version     = "~> 1.0.0"
-  environment = module.globals.environment
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
+
+terraform {
+  backend "http" {
+  }
 }
